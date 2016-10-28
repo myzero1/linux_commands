@@ -157,6 +157,7 @@ ORDER BY
 存在则更新不存在则插入
 
 ```mysq
+
 INSERT INTO customer_record (
 	online_time,
 	offline_time,
@@ -169,7 +170,7 @@ INSERT INTO customer_record (
 VALUES
 	(
 		'1476683352',
-		'1476693352',
+		'1476699352',
 		'PC-11',
 		'192.168.3.4',
 		'33112112',
@@ -177,17 +178,22 @@ VALUES
 		'2016-10-28'
 	),
 	(
-		'1476683352',
+		'1476683359',
 		'1476683361',
 		'PC-11',
 		'192.168.3.4',
 		'33112112',
 		'123456789012345679',
-		'2016-10-28'
+		'2016-10-29'
 	) ON DUPLICATE KEY UPDATE customer_record.offline_time =
 VALUES
 	(
 		customer_record.offline_time
+	),
+customer_record.record_date =
+VALUES
+	(
+		customer_record.record_date
 	)
 
 ```
