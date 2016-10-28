@@ -95,7 +95,53 @@ ORDER BY
 
 
 
-
+SELECT
+	group_concat(id)
+FROM
+	customer_record
+WHERE
+	(
+		id_number,
+		online_time,
+		offline_time
+	) IN (
+		SELECT
+			r1.id_number,
+			r1.online_time,
+			r1.offline_time
+		FROM
+			(
+				SELECT
+					*
+				FROM
+					`customer_record`
+			) AS r1
+		GROUP BY
+			r1.id_number,
+			r1.online_time,
+			r1.offline_time
+		HAVING
+			count(*) > 1
+	)
+AND id NOT IN (
+	SELECT
+		min(r1.id)
+	FROM
+		(
+			SELECT
+				*
+			FROM
+				`customer_record`
+		) AS r1
+	GROUP BY
+		r1.id_number,
+		r1.online_time,
+		r1.offline_time
+	HAVING
+		count(*) > 1
+)
+ORDER BY
+	id_number
 
 
 
