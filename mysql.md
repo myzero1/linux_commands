@@ -1,4 +1,4 @@
-覆盖所有完成分页
+覆盖索引完成分页
 
 ```mysql
 SELECT
@@ -194,8 +194,6 @@ AND id not IN (
 	HAVING
 		count(*) > 1
 )
-ORDER BY
-	id_number
 
 
 ```
